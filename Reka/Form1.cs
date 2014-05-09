@@ -52,7 +52,7 @@ namespace Reka
                 if (!char.IsControl(chr) && !char.IsDigit(chr)) // && e.KeyChar != '.')
                 {
                     this.txtArrayIndexNumber.Text = "0";
-                    Console.WriteLine("Don't pase a non-number");
+                    Console.WriteLine("Don't paste a non-number");
                     return;
                 }
 
@@ -76,6 +76,59 @@ namespace Reka
         } // End Sub txtArrayIndexNumber_KeyPress 
 
 
+        
+
+        private static System.Globalization.NumberFormatInfo CreateSwissNumberFormatInfo()
+        {
+            //System.Globalization.NumberFormatInfo nfi = (System.Globalization.NumberFormatInfo)System.Globalization.CultureInfo.InvariantCulture.NumberFormat.Clone();
+            System.Globalization.NumberFormatInfo nfi = new System.Globalization.NumberFormatInfo();
+            nfi.NumberGroupSeparator = "'";
+            nfi.NumberDecimalSeparator = ".";
+
+            nfi.CurrencyGroupSeparator = "'";
+            nfi.CurrencyDecimalSeparator = ".";
+            nfi.CurrencySymbol = "CHF";
+
+            return nfi;
+        } // End Function SetupNumberFormatInfo
+
+        private static System.Globalization.NumberFormatInfo nfi = CreateSwissNumberFormatInfo();
+
+        // http://stackoverflow.com/questions/20156/is-there-an-easy-way-to-create-ordinals-in-c
+        public static string AddOrdinal(int num)
+        {
+            string minus = "";
+
+            if (num <= 0)
+            {
+                minus = "-";
+                num *= -1;
+            }
+                
+
+            switch (num % 100)
+            {
+                case 11:
+                case 12:
+                case 13:
+                    return minus + num.ToString("N0", nfi) + "th";
+            }
+
+            switch (num % 10)
+            {
+                case 1:
+                    return minus + num.ToString("N0", nfi) + "st";
+                case 2:
+                    return minus + num.ToString("N0", nfi) + "nd";
+                case 3:
+                    return minus + num.ToString("N0", nfi) + "rd";
+                default:
+                    return minus + num.ToString("N0", nfi) + "th";
+            }
+
+        }
+
+
         private void btnPrevious_Click(object sender, EventArgs e)
         {
             int iCurrentIndex;
@@ -89,7 +142,7 @@ namespace Reka
 
             if (iCurrentIndex > m_lsData.Count - 1)
             {
-                System.Windows.Forms.MessageBox.Show("There is no " + iCurrentIndex.ToString() + "th entry.");
+                System.Windows.Forms.MessageBox.Show("There is no " + AddOrdinal(iCurrentIndex) + " entry.");
                 return;
             }
 
@@ -117,7 +170,7 @@ namespace Reka
 
             if (iCurrentIndex > m_lsData.Count - 1)
             {
-                System.Windows.Forms.MessageBox.Show("There is no " + iCurrentIndex.ToString() + "th entry.");
+                System.Windows.Forms.MessageBox.Show("There is no " + AddOrdinal(iCurrentIndex) + " entry.");
                 return;
             }
 
