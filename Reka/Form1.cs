@@ -111,19 +111,19 @@ namespace Reka
                 case 11:
                 case 12:
                 case 13:
-                    return minus + num.ToString("N0", nfi) + "th";
+                    return string.Format("{0}{1}{2}", minus, num.ToString("N0", nfi), "th");
             } // End switch (num % 100)
 
             switch (num % 10)
             {
                 case 1:
-                    return minus + num.ToString("N0", nfi) + "st";
+                    return string.Format("{0}{1}{2}", minus, num.ToString("N0", nfi), "st");
                 case 2:
-                    return minus + num.ToString("N0", nfi) + "nd";
+                    return string.Format("{0}{1}{2}", minus, num.ToString("N0", nfi), "nd");
                 case 3:
-                    return minus + num.ToString("N0", nfi) + "rd";
+                    return string.Format("{0}{1}{2}", minus, num.ToString("N0", nfi), "rd");
                 default:
-                    return minus + num.ToString("N0", nfi) + "th";
+                    return string.Format("{0}{1}{2}", minus, num.ToString("N0", nfi), "th");
             } // End switch (num % 10)
 
         } // End Function AddOrdinal
@@ -142,7 +142,7 @@ namespace Reka
 
             if (iCurrentIndex > m_lsData.Count - 1)
             {
-                System.Windows.Forms.MessageBox.Show("There is no " + AddOrdinal(iCurrentIndex) + " entry.");
+                System.Windows.Forms.MessageBox.Show("There is no " + AddOrdinal(iCurrentIndex - 1) + " entry.");
                 return;
             }
 
@@ -170,7 +170,7 @@ namespace Reka
 
             if (iCurrentIndex > m_lsData.Count - 1)
             {
-                System.Windows.Forms.MessageBox.Show("There is no " + AddOrdinal(iCurrentIndex) + " entry.");
+                System.Windows.Forms.MessageBox.Show("There is no " + AddOrdinal(iCurrentIndex + 1) + " entry.");
                 return;
             }
 
