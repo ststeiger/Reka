@@ -99,11 +99,11 @@ namespace Reka
         {
             string minus = "";
 
-            if (num <= 0)
+            if (num < 0)
             {
                 minus = "-";
                 num *= -1;
-            }
+            } // End if (num < 0)
                 
 
             switch (num % 100)
@@ -112,7 +112,7 @@ namespace Reka
                 case 12:
                 case 13:
                     return minus + num.ToString("N0", nfi) + "th";
-            }
+            } // End switch (num % 100)
 
             switch (num % 10)
             {
@@ -124,9 +124,9 @@ namespace Reka
                     return minus + num.ToString("N0", nfi) + "rd";
                 default:
                     return minus + num.ToString("N0", nfi) + "th";
-            }
+            } // End switch (num % 10)
 
-        }
+        } // End Function AddOrdinal
 
 
         private void btnPrevious_Click(object sender, EventArgs e)
