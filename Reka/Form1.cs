@@ -76,8 +76,7 @@ namespace Reka
         } // End Sub txtArrayIndexNumber_KeyPress 
 
 
-        
-
+        // Because Win 8.1 is a stupid and buggy OS
         private static System.Globalization.NumberFormatInfo CreateSwissNumberFormatInfo()
         {
             //System.Globalization.NumberFormatInfo nfi = (System.Globalization.NumberFormatInfo)System.Globalization.CultureInfo.InvariantCulture.NumberFormat.Clone();
